@@ -8,7 +8,8 @@
 #
 
 import Tkinter # requires python-tk/python-tkinter package
-from PIL import ImageTk, Image # requires python-pil.imagetk/py-Pillow
+from PIL import Image	# requires python-pil/py-pillow/python-imaging
+from PIL import ImageTk # requires python-pil.imagetk/python-imaging-tk
 import random
 import sys		# for parsing the command line
 
