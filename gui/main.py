@@ -65,7 +65,13 @@ def update_view(root):
 #
 # Main
 #
-serio.init() # setup serial port
+serial_port = True
+if (len(sys.argv) == 2):
+	if (sys.argv[1] == "noserial"):
+		serial_port = False
+
+if (serial_port):
+	serio.init()
 
 root = Tkinter.Tk();
 root.attributes("-fullscreen", True)
