@@ -75,6 +75,7 @@ if (serial_port):
 
 root = Tkinter.Tk();
 root.attributes("-fullscreen", True)
+root.config(cursor="none")
 root.bind("<Escape>", exit) # listen to <ESC> key press and exit
 root.config(bg="white")
 
