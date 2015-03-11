@@ -8,10 +8,11 @@
 #
 
 import Tkinter # requires python-tk/python-tkinter package
-from PIL import ImageTk, Image # requires python-pil.imagetk
+from PIL import ImageTk, Image # requires python-pil.imagetk/py-Pillow
 import random
+import sys		# for parsing the command line
 
-import serio
+import serio	# see serio.py in this directory	
 
 #
 # TUNABLES
