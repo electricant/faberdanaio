@@ -28,8 +28,8 @@ EFFECT_NAME='grazie'
 # There is this number of audio files, starting from 0
 EFFECT_NUMBER=11
 
-# Play a wave file
-def sayThanks():
+# Play a wave file. The 'dummy' argument is given for bind() method within tkinter
+def sayThanks(dummy):
 	f = getFile()
 	device = alsaaudio.PCM(card='default')
 	# Set attributes
@@ -69,5 +69,5 @@ def getFile():
 	else:
 		num = random.randint(0, EFFECT_NUMBER);
 		filename += "%s%u.wav" % (EFFECT_NAME, num);
-	print filename
+
 	return wave.open(filename, 'rb')

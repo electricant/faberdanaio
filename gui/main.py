@@ -14,7 +14,7 @@ import random
 import sys		# for parsing the command line
 
 import serio	# see serio.py in this directory	
-
+import sound	# see sound.py in this directory
 #
 # TUNABLES
 #
@@ -78,6 +78,7 @@ root = Tkinter.Tk();
 root.attributes("-fullscreen", True)
 root.config(cursor="none")
 root.bind("<Escape>", exit) # listen to <ESC> key press and exit
+root.bind("<space>", sound.sayThanks)
 root.config(bg="white")
 
 # resize image keeping aspect ratio. The reference is the screen size in order
