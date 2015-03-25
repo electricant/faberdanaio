@@ -19,7 +19,7 @@ import serio	# see serio.py in this directory
 # TUNABLES
 #
 REFRESH_RATE_MS = 30 # ~30 fps
-ANI_WIDTH_RATIO = 0.2 # of screen width for the animated image
+ANI_WIDTH_RATIO = 0.25 # of screen width for the animated image
 
 #
 # Global variabes
@@ -82,7 +82,7 @@ root.config(bg="white")
 
 # resize image keeping aspect ratio. The reference is the screen size in order
 # to be consistent on every screen resolution and size
-bouncyImage = Image.open("pig.png")
+bouncyImage = Image.open("images/pig.png")
 newWidth = ANI_WIDTH_RATIO * root.winfo_screenwidth()
 ratio = newWidth / bouncyImage.size[0]
 newHeight = bouncyImage.size[1] * ratio
@@ -93,7 +93,7 @@ bouncyLabel = Tkinter.Label(root, image = bImage, bg="white")
 bouncyLabel.pack()
 
 # place "Faberlibertatis" logo top center
-logoImg = Image.open("logo_faber.png")
+logoImg = Image.open("images/logo_faber.png")
 lImage = ImageTk.PhotoImage(logoImg)
 logoLabel = Tkinter.Label(root, image = lImage, bg="white")
 logoLabel.pack(side = "top")
