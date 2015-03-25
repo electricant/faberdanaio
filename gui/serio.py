@@ -11,6 +11,7 @@ import os
 import re
 import thread
 
+import sound	# local module that plays sound effects
 #
 # Global variables
 #
@@ -73,9 +74,10 @@ def getPending():
 	return oldPending
 
 # Function that reads the serial port continuously waiting for '!'
-# When a coin is detected increment pending
+# When a coin is detected increment pending (shoud run in a separate thread)
 def serRead(arg):
 	global pending
 	while True:
 		if (serPort.read() == '!'):
 			pending = pending + 1
+			sound.sayThanks()
