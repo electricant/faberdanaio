@@ -110,8 +110,8 @@ MAX_X = root.winfo_screenwidth() - bouncyLabel.winfo_width()
 MAX_Y = root.winfo_screenheight() - bouncyLabel.winfo_height()
 MIN_Y = logoLabel.winfo_height()
 # Add a bit of randomness in the choiche of the speed
-speedX = random.randint(1,4)
-speedY = random.randint(1,4)
+speedX = random.randint(2,4)
+speedY = random.randint(2,4)
 print("speedX = %u, speedY = %u" % (speedX, speedY))
 # Start the animation
 root.after(REFRESH_RATE_MS, update_view, root)
