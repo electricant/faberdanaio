@@ -26,7 +26,7 @@ AUDIO_DIR='audio/'
 # all audio effects files begin with this token
 EFFECT_NAME='grazie'
 # There is this number of audio files, starting from 0
-EFFECT_NUMBER=11
+EFFECT_NUMBER=15
 
 # Play a wave file. The 'dummy' argument is given for bind() method within tkinter
 def sayThanks(dummy):
