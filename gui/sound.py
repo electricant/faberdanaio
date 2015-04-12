@@ -29,7 +29,7 @@ EFFECT_NAME='grazie'
 EFFECT_NUMBER=15
 
 # Play a wave file. The 'dummy' argument is given for bind() method within tkinter
-def sayThanks(dummy):
+def sayThanks(dummy = None):
 	f = getFile()
 	device = alsaaudio.PCM(card='default')
 	# Set attributes
