@@ -37,7 +37,7 @@ ser_cnt  EQU 0x09		; counter for serial transmission
 coin     EQU 0x0A		; set to 1 when COIN is 1 and reset otherwhise
 
 ; CODE
-	ORG	0x000	
+	ORG	0x000
 	goto init
 ;**************
 ; Subroutines *
@@ -58,10 +58,10 @@ dly	nop
 ; This function does not wait for the start bit as this is already done in
 ; the main loop.
 ser_receive
-	movlw	8
+	movlw	.8
 	movwf ser_cnt
 	clrf	ser_data
-	movlw 24		; sample in the middle of the waveform
+	movlw .34		; sample in the middle of the waveform
 	call	delay_w4us
 read
 	btfss	SER_IN
@@ -69,7 +69,7 @@ read
 	btfsc	SER_IN
 	bsf	STATUS,C	; If bit = 1, set Carry = 1
 	rrf	ser_data,f	; Shift Carry into the output byte
-	movlw	15		; determined by trial and error
+	movlw	.23		; determined by trial and error
 	call	delay_w4us
 	decfsz ser_cnt,f
 	goto 	read
@@ -80,9 +80,9 @@ read
 ser_send
 	; send start bit
 	bcf	SER_OUT
-	movlw	16		; determined by trial and error this value gives
+	movlw	.23		; determined by trial and error this value gives
 	call	delay_w4us  ; a delay of exactly 104us
-	movlw	8
+	movlw .8		; counter for the bit to send
 	movwf ser_cnt
 send
 	rrf	ser_data,f
@@ -90,21 +90,30 @@ send
 	bcf	SER_OUT	; bit is 0 => line low
 	btfsc	STATUS,C
 	bsf	SER_OUT	; bit is 1 => line high
-	movlw	16
+	movlw	.23
 	call	delay_w4us
 	decfsz ser_cnt,f
 	goto	send
 	; idle value for the line is high (+5v)
 	bsf	SER_OUT
-	movlw	16
+	movlw	.23
 	call	delay_w4us
 	retlw	0
+
+; Routine to test timings
+sertest
+	movlw b'01010101'
+	movwf ser_data
+	call  ser_send
+	movlw .100
+	call  delay_w4us
+	call  sertest
 
 ;***************
 ; Program code *
 ;***************
 init	; device configuration
-	movlw	b'00000000'	; ignore what is written in this part.
+	movlw	b'00010010'	; ignore what is written in this part.
 	movwf	OSCCAL	; calibrate the oscillator directly
 	movlw	b'011101'	; see pin assignments
 	tris	GPIO
@@ -117,7 +126,7 @@ init	; device configuration
 main_loop	; test for a low bit from the serial port or a coin input
 	btfss	SER_IN
 	goto	cmd_parse
-	
+
 	btfss	TMR0,0	; when the last bit is 1 toggle LED_OUT
 	goto	main_loop
 	clrf	TMR0
@@ -140,7 +149,7 @@ coin_high
 cmd_parse
 	call	ser_receive
 	bsf	coin,1	; ignore the next coin as it probably is spurious
-	
+
 	movlw 0x76		; v
 	xorwf	ser_data,w
 	btfsc	STATUS,Z
@@ -162,8 +171,8 @@ send_version
 	movlw	0x2E		; .
 	movwf	ser_data
 	call	ser_send
-	movlw	0x32		; 2	
+	movlw	0x33		; 3
 	movwf	ser_data
 	call	ser_send
-	goto	main_loop	
-END
+	goto	main_loop
+	END
