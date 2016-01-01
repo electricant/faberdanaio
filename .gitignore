@@ -55,3 +55,8 @@ target/
 
 # Vim swap files
 *.swp
+
+# firmware files
+*.cod
+*.hex
+*.lst
